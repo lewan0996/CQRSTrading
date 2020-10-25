@@ -1,5 +1,6 @@
 import { Component, HostBinding } from '@angular/core';
-import { AuthService, ScreenService, AppInfoService } from './shared/services';
+import { ScreenService } from './layout/layouts/screen.service';
+import { AppInfoService } from './shared/services/app-info.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,5 @@ export class AppComponent  {
     return Object.keys(this.screen.sizes).filter(cl => this.screen.sizes[cl]).join(' ');
   }
 
-  constructor(private authService: AuthService, private screen: ScreenService, public appInfo: AppInfoService) { }
-
-  isAutorized() {
-    return this.authService.loggedIn;
-  }
+  constructor(private screen: ScreenService, public appInfo: AppInfoService) { }
 }

@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -17,18 +16,7 @@ export class HeaderComponent {
   @Input()
   title: string;
 
-  userMenuItems = [{
-    text: 'Profile',
-    icon: 'user'
-  }, {
-    text: 'Logout',
-    icon: 'runner',
-    onClick: () => {
-      this.authService.logOut();
-    }
-  }];
-
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   toggleMenu = () => {
     this.menuToggle.emit();

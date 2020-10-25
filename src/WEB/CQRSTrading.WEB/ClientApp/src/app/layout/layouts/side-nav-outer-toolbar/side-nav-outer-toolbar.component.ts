@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ScreenService } from '../../services';
-import {  DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
+import { DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
 import { Router, NavigationEnd } from '@angular/router';
+import { ScreenService } from '../screen.service';
 
 @Component({
   selector: 'app-side-nav-outer-toolbar',

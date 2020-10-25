@@ -1,4 +1,4 @@
-<ng-container *ngIf="isAutorized(); else notAuthorized">
+<ng-container>
   <app-side-nav-outer-toolbar title="{{appInfo.title}}">
     <router-outlet></router-outlet>
     <app-footer>
@@ -8,7 +8,3 @@
     </app-footer>
   </app-side-nav-outer-toolbar>
 </ng-container>
-
-<ng-template #notAuthorized>  
-    <router-outlet></router-outlet>  
-</ng-template>
