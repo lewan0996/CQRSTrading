@@ -93,10 +93,9 @@ export class UserPanelComponent implements OnInit, OnDestroy {
   }
 
   checkAccount(): void {
-    const account = this.authService.getAccount();
+    const account = this.authService.getAccount();    
     this.isLoggedIn = !!account;
-
-    this.userName = this.isLoggedIn ? account.name : 'My account';
+    this.userName = this.isLoggedIn ? account.idTokenClaims.given_name : 'My account';
   }
 
   login(): void {

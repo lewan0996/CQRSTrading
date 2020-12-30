@@ -27,13 +27,13 @@ export const b2cPolicies = {
     },
     authorities: {
         signUpSignIn: {
-            authority: 'https://cqrstrading.b2clogin.com/tfp/2f164501-6e16-40cf-9dd8-65a9664c2544/B2C_1_CQRSTrading_SignUpSignIn'
+            authority: 'https://cqrstrading.b2clogin.com/tfp/CQRSTrading.onmicrosoft.com/B2C_1_CQRSTrading_SignUpSignIn'
         },
         resetPassword: {
-            authority: 'https://cqrstrading.b2clogin.com/tfp/2f164501-6e16-40cf-9dd8-65a9664c2544/B2C_1_CQRSTrading_PasswordReset'
+            authority: 'https://cqrstrading.b2clogin.com/tfp/CQRSTrading.onmicrosoft.com/B2C_1_CQRSTrading_PasswordReset'
         },
         editProfile: {
-            authority: 'https://cqrstrading.b2clogin.com/tfp/2f164501-6e16-40cf-9dd8-65a9664c2544/B2C_1_CQRSTrading_ProfileEdit'
+            authority: 'https://cqrstrading.b2clogin.com/tfp/CQRSTrading.onmicrosoft.com/B2C_1_CQRSTrading_ProfileEdit'
         }
     }
 };
@@ -46,7 +46,7 @@ export const b2cPolicies = {
  * The current application coordinates were pre-registered in a B2C tenant.
  */
 export const apiConfig: { b2cScopes: string[], webApi: string } = {
-    b2cScopes: ['https://cqrstrading.onmicrosoft.com/cqrstradingapi/user_impersonation'],
+    b2cScopes: ['https://cqrstrading.onmicrosoft.com/cqrstradingapi/all'],
     webApi: environment.apiUrl
 };
 // #endregion
@@ -60,7 +60,7 @@ export const apiConfig: { b2cScopes: string[], webApi: string } = {
  */
 export const msalConfig: Configuration = {
     auth: {
-        clientId: 'f6b03b09-8798-43db-a678-59e2afae2689',
+        clientId: 'f6e87a2e-e05b-4c6c-9789-3ded71140381',
         authority: b2cPolicies.authorities.signUpSignIn.authority,
         redirectUri: environment.loginRedirectUri,
         postLogoutRedirectUri: environment.loginRedirectUri,
