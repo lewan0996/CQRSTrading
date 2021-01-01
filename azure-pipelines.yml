@@ -1,0 +1,87 @@
+variables:
+  buildConfiguration: Release
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  pool:
+   vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Build
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+      displayName: Restore
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--no-restore --configuration $(buildConfiguration)'
+      displayName: Build
+
+  - job: UnitTests
+    dependsOn: Build
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '**/*UnitTests.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+      displayName: Unit tests
+  
+  - job: IntegrationTests
+    dependsOn: Build
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '**/*IntegrationTests.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+      displayName: Integration tests
+
+  - job: Publish
+    dependsOn:
+    - UnitTests
+    - IntegrationTests
+    steps:
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: '**/CQRSTrading.WEB.csproj'
+          arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        displayName: Publish
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'drop'
+          publishLocation: 'Container'
+        displayName: Publish artifacts
+
+- stage: Release
+  dependsOn: Build
+  pool:
+   vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Release
+    steps:
+      - checkout: none
+      - task: DownloadBuildArtifacts@0
+        inputs:
+          buildType: 'current'
+          downloadType: 'single'
+          artifactName: 'drop'
+          downloadPath: '$(System.ArtifactsDirectory)'
+        displayName: Download artifacts
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Visual Studio Professional Subscription(648aa60f-e4a7-4f47-b926-e602e78bae5a)'
+          appType: 'webApp'
+          WebAppName: 'cqrstrading'
+          packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
