@@ -16,7 +16,7 @@ namespace CQRSTrading.WEB
 			Configuration = configuration;
 		}
 
-		// ReSharper disable once UnusedAutoPropertyAccessor.Global
+		// ReSharper disable once MemberCanBePrivate.Global
 		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
@@ -30,18 +30,18 @@ namespace CQRSTrading.WEB
 				configuration.RootPath = "ClientApp/dist";
 			});
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(options =>
-                {
-                    Configuration.Bind("AzureAdB2C", options);
-                    options.TokenValidationParameters.NameClaimType = "name";
-                }, options =>
-                {
-                    Configuration.Bind("AzureAdB2C", options);
-                });
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddMicrosoftIdentityWebApi(options =>
+				{
+					Configuration.Bind("AzureAdB2C", options);
+					options.TokenValidationParameters.NameClaimType = "name";
+				}, options =>
+				{
+					Configuration.Bind("AzureAdB2C", options);
+				});
 
-            services.AddAuthorization();
-        }
+			services.AddAuthorization();
+		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -66,7 +66,7 @@ namespace CQRSTrading.WEB
 
 			app.UseRouting();
 
-            app.UseAuthentication();
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>

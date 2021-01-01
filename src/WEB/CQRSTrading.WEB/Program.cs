@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace CQRSTrading.WEB
 {
+	// ReSharper disable once ClassNeverInstantiated.Global
 	public class Program
 	{
 		public static void Main(string[] args)
@@ -12,6 +13,7 @@ namespace CQRSTrading.WEB
 				.Run();
 		}
 
+		// ReSharper disable once MemberCanBePrivate.Global
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
 				.ConfigureWebHostDefaults(webBuilder =>
