@@ -16,11 +16,13 @@ stages:
         command: 'restore'
         projects: '**/*.csproj'
         feedsToUse: 'select'
+      displayName: Restore
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
         projects: '**/*.csproj'
         arguments: '--no-restore --configuration $(buildConfiguration)'
+      displayName: Build
 
 - stage: Test
   dependsOn: Build
@@ -29,17 +31,18 @@ stages:
   jobs:
   - job: Test
     steps:
+    - checkout: none
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
         projects: '**/*UnitTests.csproj'
-        arguments: '--no-restore --no-build --configuration $(buildConfiguration))'
+        arguments: '--no-restore --no-build --configuration $(buildConfiguration)'
       displayName: Unit tests
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
         projects: '**/*IntegrationTests.csproj'
-        arguments: '--no-restore --no-build --configuration $(buildConfiguration))'
+        arguments: '--no-restore --no-build --configuration $(buildConfiguration)'
       displayName: Integration tests
 
 - stage: Publish
@@ -49,12 +52,14 @@ stages:
   jobs:
   - job: Publish
     steps:
+      - checkout: none
       - task: DotNetCoreCLI@2
         inputs:
           command: 'publish'
           publishWebProjects: false
           projects: '**/CQRSTrading.WEB.csproj'
-          arguments: '--no-restore --no-build --configuration $(buildConfiguration))'
+          arguments: '--no-restore --no-build --configuration $(buildConfiguration)'
+        displayName: Publish
 
 - stage: Release
   dependsOn: Publish
@@ -63,6 +68,7 @@ stages:
   jobs:
   - job: Release
     steps:
+      - checkout: none
       - task: AzureRmWebAppDeployment@4
         inputs:
           ConnectionType: 'AzureRM'
@@ -70,3 +76,4 @@ stages:
           appType: 'webApp'
           WebAppName: 'cqrstrading'
           packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        displayName: Deploy
