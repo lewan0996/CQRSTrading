@@ -1,0 +1,72 @@
+variables:
+  buildConfiguration: release
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  pool:
+   vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Build
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--no-restore --configuration $(buildConfiguration)'
+
+- stage: Test
+  dependsOn: Build
+  pool:
+   vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Test
+    steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '**/*UnitTests.csproj'
+        arguments: '--no-restore --no-build --configuration $(buildConfiguration))'
+      displayName: Unit tests
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '**/*IntegrationTests.csproj'
+        arguments: '--no-restore --no-build --configuration $(buildConfiguration))'
+      displayName: Integration tests
+
+- stage: Publish
+  dependsOn: Test
+  pool:
+   vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Publish
+    steps:
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: '**/CQRSTrading.WEB.csproj'
+          arguments: '--no-restore --no-build --configuration $(buildConfiguration))'
+
+- stage: Release
+  dependsOn: Publish
+  pool:
+   vmImage: 'ubuntu-latest'
+  jobs:
+  - job: Release
+    steps:
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'Visual Studio Professional Subscription(648aa60f-e4a7-4f47-b926-e602e78bae5a)'
+          appType: 'webApp'
+          WebAppName: 'cqrstrading'
+          packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
