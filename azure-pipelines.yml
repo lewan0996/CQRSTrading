@@ -1,5 +1,5 @@
 variables:
-  buildConfiguration: release
+  buildConfiguration: Release
 
 trigger:
 - master
@@ -24,12 +24,8 @@ stages:
         arguments: '--no-restore --configuration $(buildConfiguration)'
       displayName: Build
 
-- stage: Test
-  dependsOn: Build
-  pool:
-   vmImage: 'ubuntu-latest'
-  jobs:
-  - job: Test
+  - job: UnitTests
+    dependsOn: Build
     steps:
     - task: DotNetCoreCLI@2
       inputs:
@@ -37,6 +33,10 @@ stages:
         projects: '**/*UnitTests.csproj'
         arguments: '--no-restore --no-build --configuration $(buildConfiguration)'
       displayName: Unit tests
+  
+  - job: IntegrationTests
+    dependsOn: Build
+    steps:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
@@ -44,12 +44,10 @@ stages:
         arguments: '--no-restore --no-build --configuration $(buildConfiguration)'
       displayName: Integration tests
 
-- stage: Publish
-  dependsOn: Test
-  pool:
-   vmImage: 'ubuntu-latest'
-  jobs:
   - job: Publish
+    dependsOn:
+    - UnitTests
+    - IntegrationTests
     steps:
       - task: DotNetCoreCLI@2
         inputs:
@@ -60,13 +58,12 @@ stages:
         displayName: Publish
 
 - stage: Release
-  dependsOn: Publish
+  dependsOn: Build
   pool:
    vmImage: 'ubuntu-latest'
   jobs:
   - job: Release
-    steps:
-      - checkout: none
+    steps:      
       - task: AzureRmWebAppDeployment@4
         inputs:
           ConnectionType: 'AzureRM'
