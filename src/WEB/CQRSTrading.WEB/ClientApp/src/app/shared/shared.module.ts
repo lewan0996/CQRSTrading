@@ -9,6 +9,7 @@ import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppInfoService } from './services/app-info.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -22,7 +23,8 @@ import { AppInfoService } from './services/app-info.service';
     DxTreeViewModule,
     DxListModule,
     DxContextMenuModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   exports: [
     AppRoutingModule,
