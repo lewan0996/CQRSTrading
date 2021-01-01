@@ -31,7 +31,6 @@ stages:
   jobs:
   - job: Test
     steps:
-    - checkout: none
     - task: DotNetCoreCLI@2
       inputs:
         command: 'test'
@@ -52,12 +51,11 @@ stages:
   jobs:
   - job: Publish
     steps:
-      - checkout: none
       - task: DotNetCoreCLI@2
         inputs:
           command: 'publish'
           publishWebProjects: false
-          projects: '**/*CQRSTrading.WEB.csproj'
+          projects: '**/CQRSTrading.WEB.csproj'
           arguments: '--no-restore --no-build --configuration $(buildConfiguration)'
         displayName: Publish
 
