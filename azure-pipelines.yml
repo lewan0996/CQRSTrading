@@ -85,5 +85,3 @@ stages:
           appType: 'webApp'
           WebAppName: 'cqrstrading'
           packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
-          enableCustomDeployment: true
-          DeploymentType: 'zipDeploy'
