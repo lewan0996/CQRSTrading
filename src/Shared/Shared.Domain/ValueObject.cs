@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Shared.Domain
+namespace CQRSTrading.Shared.Domain
 {
 	public abstract class ValueObject
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MediatR;
 
-namespace Shared.Domain
+namespace CQRSTrading.Shared.Domain
 {
 	public abstract class Entity
 	{

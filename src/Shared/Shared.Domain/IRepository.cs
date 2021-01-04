@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shared.Domain
+namespace CQRSTrading.Shared.Domain
 {
 	public interface IRepository<T> where T : IAggregateRoot
 	{
