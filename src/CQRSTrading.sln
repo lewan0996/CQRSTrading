@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WEB", "WEB", "{9C647951-126
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Domain", "Shared\Shared.Domain\Shared.Domain.csproj", "{0E299368-6436-451D-9B92-A60ECB712EE1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auctions", "Auctions", "{62B553A5-F383-4975-B2D7-E20D503905A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auctions.Domain", "Auctions\Auctions.Domain\Auctions.Domain.csproj", "{E92B7DE7-977F-4CB5-8646-43530C0B44A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{0E299368-6436-451D-9B92-A60ECB712EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E299368-6436-451D-9B92-A60ECB712EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E299368-6436-451D-9B92-A60ECB712EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E92B7DE7-977F-4CB5-8646-43530C0B44A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92B7DE7-977F-4CB5-8646-43530C0B44A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92B7DE7-977F-4CB5-8646-43530C0B44A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E92B7DE7-977F-4CB5-8646-43530C0B44A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8C899659-A8F2-4A44-860B-CB0651598F36} = {9C647951-1263-4A14-BD0E-F2043F899934}
 		{0E299368-6436-451D-9B92-A60ECB712EE1} = {3DFB0735-7D1B-4009-AEEA-77CD42A3F6E0}
+		{E92B7DE7-977F-4CB5-8646-43530C0B44A4} = {62B553A5-F383-4975-B2D7-E20D503905A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A78CE79-3C4D-4318-A834-C7162F5ABD56}
