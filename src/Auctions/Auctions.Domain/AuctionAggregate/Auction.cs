@@ -30,6 +30,9 @@ namespace CQRSTrading.Auctions.Domain.AuctionAggregate
 			}
 		}
 
+		// ReSharper disable once UnusedMember.Local
+		private Auction() { } // For EF
+
 		public void AddImage(string imageBase64)
 		{
 			if (string.IsNullOrWhiteSpace(imageBase64))

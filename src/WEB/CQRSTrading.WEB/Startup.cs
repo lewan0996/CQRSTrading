@@ -1,3 +1,5 @@
+using Autofac;
+using CQRSTrading.WEB.Infrastructure.AutofacModules;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +43,12 @@ namespace CQRSTrading.WEB
 				});
 
 			services.AddAuthorization();
+		}
+
+		// ReSharper disable once UnusedMember.Global
+		public void ConfigureContainer(ContainerBuilder builder)
+		{
+			builder.RegisterModule(new AuctionsModule(Configuration));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
