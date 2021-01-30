@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared.Domain
+namespace CQRSTrading.Shared.Domain
 {
 	public interface ITransaction : IDisposable
 	{

@@ -1,3 +1,8 @@
+using System;
+using System.Reflection;
+using Autofac;
+using CQRSTrading.WEB.Infrastructure.AutofacModules;
+using CQRSTrading.WEB.Infrastructure.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
+using Microsoft.OpenApi.Models;
 
 namespace CQRSTrading.WEB
 {
@@ -22,8 +28,12 @@ namespace CQRSTrading.WEB
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllersWithViews()
+			services.AddControllersWithViews(opts =>
+				{
+					opts.Filters.Add(typeof(GlobalExceptionFilter));
+				})
 				.AddNewtonsoftJson();
+
 			// In production, the Angular files will be served from this directory
 			services.AddSpaStaticFiles(configuration =>
 			{
@@ -41,6 +51,24 @@ namespace CQRSTrading.WEB
 				});
 
 			services.AddAuthorization();
+
+			services.AddSwaggerGen(options =>
+			{
+				options.SwaggerDoc("v1", new OpenApiInfo
+				{
+					Title = $"CQRS Trading - {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}",
+					Version = "v1"
+				});
+				options.IncludeXmlComments($@"{AppDomain.CurrentDomain.BaseDirectory}\{Assembly.GetExecutingAssembly()
+					.GetName()
+					.Name}.xml");
+			});
+		}
+
+		// ReSharper disable once UnusedMember.Global
+		public void ConfigureContainer(ContainerBuilder builder)
+		{
+			builder.RegisterModule(new ApplicationModule(Configuration));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +87,14 @@ namespace CQRSTrading.WEB
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
+
+			app.UseSwagger()
+				.UseSwaggerUI(c =>
+				{
+					c.SwaggerEndpoint("/swagger/v1/swagger.json", "CQRS Trading");
+					c.RoutePrefix = "swagger";
+				});
+
 			if (!env.IsDevelopment())
 			{
 				app.UseSpaStaticFiles();

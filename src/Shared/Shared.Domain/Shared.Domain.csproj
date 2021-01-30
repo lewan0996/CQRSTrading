@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>CQRSTrading.Shared.Domain</AssemblyName>
+    <RootNamespace>CQRSTrading.Shared.Domain</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

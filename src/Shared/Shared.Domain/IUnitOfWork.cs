@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Shared.Domain
+namespace CQRSTrading.Shared.Domain
 {
 	public interface IUnitOfWork
 	{

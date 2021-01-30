@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>CQRSTrading.Auctions.Infrastructure</AssemblyName>
+    <RootNamespace>CQRSTrading.Auctions.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Auctions.Domain\Auctions.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
