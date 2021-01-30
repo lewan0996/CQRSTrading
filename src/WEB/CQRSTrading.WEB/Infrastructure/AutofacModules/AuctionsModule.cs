@@ -1,6 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using CQRSTrading.Auctions.Infrastructure.EF;
+using CQRSTrading.Auctions.Domain.AuctionAggregate;
+using CQRSTrading.Auctions.Infrastructure;
+using CQRSTrading.Shared.Domain;
+using CQRSTrading.Shared.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +22,10 @@ namespace CQRSTrading.WEB.Infrastructure.AutofacModules
 		protected override void Load(ContainerBuilder builder)
 		{
 			AddDbContext(builder);
+
+			builder.RegisterType<AuctionsRepository>()
+				.As<IRepository<Auction>>()
+				.InstancePerLifetimeScope();
 		}
 
 		private void AddDbContext(ContainerBuilder builder)

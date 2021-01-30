@@ -5,14 +5,21 @@ namespace CQRSTrading.Auctions.Domain.AuctionAggregate
 {
 	public class Auction : Entity, IAggregateRoot
 	{
+		public Guid UserId { get; private set; }
 		public AuctionName Name { get; private set; }
 		public AuctionDescription Description { get; private set; }
 		public Price Price { get; private set; }
 		public int Quantity { get; private set; }
 		public string ImageBase64 { get; private set; }
 
-		public Auction(AuctionName name, AuctionDescription description, Price price, int quantity, string imageBase64 = null)
+		public Auction(Guid id, Guid userId, AuctionName name, AuctionDescription description, Price price, int quantity, string imageBase64 = null) : base(id)
 		{
+			if (userId == default)
+			{
+				throw new DomainException("UserId must not have a default value");
+			}
+
+			UserId = userId;
 			Name = name ?? throw new ArgumentNullException(nameof(name));
 			Description = description ?? throw new ArgumentNullException(nameof(description));
 			Price = price ?? throw new ArgumentNullException(nameof(price));

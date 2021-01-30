@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <AssemblyName>CQRSTrading.Shared.Infrastructure.EF</AssemblyName>
-    <RootNamespace>CQRSTrading.Shared.Infrastructure.EF</RootNamespace>
+    <AssemblyName>CQRSTrading.Shared.Infrastructure</AssemblyName>
+    <RootNamespace>CQRSTrading.Shared.Infrastructure</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

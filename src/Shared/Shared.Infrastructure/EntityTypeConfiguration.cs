@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CQRSTrading.Shared.Infrastructure.EF
+namespace CQRSTrading.Shared.Infrastructure
 {
 	public class EntityTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : Entity
 	{

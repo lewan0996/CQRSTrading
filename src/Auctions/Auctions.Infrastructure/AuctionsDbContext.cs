@@ -1,7 +1,7 @@
 ﻿using CQRSTrading.Auctions.Domain.AuctionAggregate;
 using Microsoft.EntityFrameworkCore;
 
-namespace CQRSTrading.Auctions.Infrastructure.EF
+namespace CQRSTrading.Auctions.Infrastructure
 {
 	public class AuctionsDbContext : DbContext
 	{

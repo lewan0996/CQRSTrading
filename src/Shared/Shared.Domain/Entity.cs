@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MediatR;
 
 namespace CQRSTrading.Shared.Domain
@@ -25,10 +26,20 @@ namespace CQRSTrading.Shared.Domain
 			}
 		}
 
-		public int Id { get; protected set; }
+		public Guid Id { get; protected set; }
 
 		private List<INotification> _domainEvents;
 		public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
+
+		protected Entity()
+		{
+			Id = Guid.NewGuid();
+		}
+
+		protected Entity(Guid id)
+		{
+			Id = id;
+		}
 
 		public void AddDomainEvent(INotification eventItem)
 		{

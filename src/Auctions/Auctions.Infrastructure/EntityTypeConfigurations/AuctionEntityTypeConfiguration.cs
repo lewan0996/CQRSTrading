@@ -1,9 +1,9 @@
 ﻿using CQRSTrading.Auctions.Domain.AuctionAggregate;
-using CQRSTrading.Shared.Infrastructure.EF;
+using CQRSTrading.Shared.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CQRSTrading.Auctions.Infrastructure.EF.EntityTypeConfigurations
+namespace CQRSTrading.Auctions.Infrastructure.EntityTypeConfigurations
 {
 	public class AuctionEntityTypeConfiguration : EntityTypeConfiguration<Auction>
 	{

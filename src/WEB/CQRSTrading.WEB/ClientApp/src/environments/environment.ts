@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'localhost:qwe',
-  loginRedirectUri: 'https://localhost:44392'
+  loginRedirectUri: 'https://localhost:5001'
 };
 
 /*
