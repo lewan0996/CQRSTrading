@@ -1,4 +1,4 @@
-﻿namespace CQRSTrading.Shared.Domain
+﻿namespace CQRSTrading.Shared.Domain.Exceptions
 {
 	public interface IDomainException { }
 }

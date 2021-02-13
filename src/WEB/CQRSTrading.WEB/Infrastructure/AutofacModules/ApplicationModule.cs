@@ -3,6 +3,8 @@ using Autofac;
 using CQRSTrading.Auctions.Infrastructure;
 using CQRSTrading.Shared.Domain;
 using CQRSTrading.Shared.Infrastructure;
+using CQRSTrading.Shared.Infrastructure.AzureStorageQueue;
+using CQRSTrading.Shared.ProjectionEvents.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -23,6 +25,7 @@ namespace CQRSTrading.WEB.Infrastructure.AutofacModules
 			builder.RegisterModule(new AuctionsModule(_configuration));
 
 			RegisterUnitOfWork(builder);
+			RegisterAzureStorageQueue(builder);
 		}
 
 		private void RegisterUnitOfWork(ContainerBuilder builder)
@@ -35,6 +38,22 @@ namespace CQRSTrading.WEB.Infrastructure.AutofacModules
 				))
 				.As<IUnitOfWork>()
 				.InstancePerLifetimeScope();
+		}
+
+		private void RegisterAzureStorageQueue(ContainerBuilder builder)
+		{
+			var azureStorageQueueConfiguration = new AzureStorageQueueConfiguration();
+
+			_configuration.GetSection("AzureStorageQueue")
+				.Bind(azureStorageQueueConfiguration);
+
+			builder.RegisterInstance(azureStorageQueueConfiguration)
+				.SingleInstance();
+
+			builder.RegisterType<AzureStorageQueueEventBus>()
+				.As<IProjectionEventBus>()
+				.SingleInstance()
+				.OnActivated(async h => await h.Instance.InitAsync());
 		}
 	}
 }

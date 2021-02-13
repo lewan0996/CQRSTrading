@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using CQRSTrading.Shared.Domain;
 using CQRSTrading.Shared.Domain.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Hosting;
@@ -29,13 +28,13 @@ namespace CQRSTrading.WEB.Infrastructure.Filters
 
 			switch (context.Exception)
 			{
-				case IDomainException _:
+				case IDomainException:
 					OnDomainException(context);
 					break;
-				case ValidationException _:
+				case ValidationException:
 					OnValidationException(context);
 					break;
-				case RecordNotFoundException _:
+				case RecordNotFoundException:
 					OnRecordNotFoundException(context);
 					break;
 				default:

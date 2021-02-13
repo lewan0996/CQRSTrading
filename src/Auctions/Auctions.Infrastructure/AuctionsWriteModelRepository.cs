@@ -5,9 +5,9 @@ using CQRSTrading.Shared.Infrastructure;
 
 namespace CQRSTrading.Auctions.Infrastructure
 {
-	public class AuctionsRepository : Repository<Auction>
+	public class AuctionsWriteModelRepository : WriteModelRepository<Auction>
 	{
-		public AuctionsRepository(AuctionsDbContext dbContext, IUnitOfWork unitOfWork) : base(dbContext, unitOfWork) { }
+		public AuctionsWriteModelRepository(AuctionsDbContext dbContext, IUnitOfWork unitOfWork) : base(dbContext, unitOfWork) { }
 		protected override IQueryable<Auction> GetQueryWithAllIncludes() => ((AuctionsDbContext)DbContext).Auctions;
 	}
 }

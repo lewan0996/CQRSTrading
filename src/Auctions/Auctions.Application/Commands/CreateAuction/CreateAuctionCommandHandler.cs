@@ -1,18 +1,24 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using CQRSTrading.Auctions.Domain.AuctionAggregate;
+using CQRSTrading.Auctions.ProjectionEvents;
 using CQRSTrading.Shared.Domain;
+using CQRSTrading.Shared.ProjectionEvents.Abstractions;
 using MediatR;
 
 namespace CQRSTrading.Auctions.Application.Commands.CreateAuction
 {
+	// ReSharper disable once UnusedType.Global
 	public class CreateAuctionCommandHandler : AsyncRequestHandler<CreateAuctionCommand>
 	{
-		private readonly IRepository<Auction> _auctionRepository;
+		private readonly IWriteModelRepository<Auction> _auctionWriteModelRepository;
+		private readonly IProjectionEventBus _projectionEventBus;
 
-		public CreateAuctionCommandHandler(IRepository<Auction> auctionRepository)
+		public CreateAuctionCommandHandler(IWriteModelRepository<Auction> auctionWriteModelRepository,
+			IProjectionEventBus projectionEventBus)
 		{
-			_auctionRepository = auctionRepository;
+			_auctionWriteModelRepository = auctionWriteModelRepository;
+			_projectionEventBus = projectionEventBus;
 		}
 
 		protected override async Task Handle(CreateAuctionCommand request, CancellationToken cancellationToken)
@@ -27,9 +33,11 @@ namespace CQRSTrading.Auctions.Application.Commands.CreateAuction
 				request.ImageBase64
 			);
 
-			await _auctionRepository.AddAsync(auction);
+			await _auctionWriteModelRepository.AddAsync(auction);
 
-			await _auctionRepository.UnitOfWork.SaveEntitiesAsync();
+			await _auctionWriteModelRepository.UnitOfWork.SaveEntitiesAsync();
+
+			await _projectionEventBus.PublishAsync(new AuctionCreatedProjectionEvent(auction));
 		}
 	}
 }

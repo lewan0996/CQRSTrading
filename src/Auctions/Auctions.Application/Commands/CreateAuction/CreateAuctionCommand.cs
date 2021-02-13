@@ -2,6 +2,8 @@
 using MediatR;
 using Newtonsoft.Json;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 namespace CQRSTrading.Auctions.Application.Commands.CreateAuction
 {
 	public class CreateAuctionCommand : IRequest

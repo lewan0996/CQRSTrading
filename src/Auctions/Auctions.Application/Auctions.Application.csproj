@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Auctions.Domain\Auctions.Domain.csproj" />
+    <ProjectReference Include="..\Auctions.ProjectionEvents\Auctions.ProjectionEvents.csproj" />
   </ItemGroup>
 
 </Project>

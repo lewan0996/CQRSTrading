@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace CQRSTrading.Shared.Domain
 {
-	public interface IRepository<T> where T : IAggregateRoot
+	public interface IWriteModelRepository<T> where T : IAggregateRoot
 	{
 		Task AddAsync(T item);
 		Task<T> GetByIdAsync(Guid id);

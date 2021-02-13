@@ -3,7 +3,6 @@ using Autofac.Extensions.DependencyInjection;
 using CQRSTrading.Auctions.Domain.AuctionAggregate;
 using CQRSTrading.Auctions.Infrastructure;
 using CQRSTrading.Shared.Domain;
-using CQRSTrading.Shared.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +22,8 @@ namespace CQRSTrading.WEB.Infrastructure.AutofacModules
 		{
 			AddDbContext(builder);
 
-			builder.RegisterType<AuctionsRepository>()
-				.As<IRepository<Auction>>()
+			builder.RegisterType<AuctionsWriteModelRepository>()
+				.As<IWriteModelRepository<Auction>>()
 				.InstancePerLifetimeScope();
 		}
 

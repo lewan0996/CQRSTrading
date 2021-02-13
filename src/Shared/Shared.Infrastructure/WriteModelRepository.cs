@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CQRSTrading.Shared.Infrastructure
 {
-	public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity, IAggregateRoot
+	public abstract class WriteModelRepository<TEntity> : IWriteModelRepository<TEntity> where TEntity : Entity, IAggregateRoot
 	{
 		protected readonly DbContext DbContext;
 
-		protected Repository(DbContext dbContext, IUnitOfWork unitOfWork)
+		protected WriteModelRepository(DbContext dbContext, IUnitOfWork unitOfWork)
 		{
 			UnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 			DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));

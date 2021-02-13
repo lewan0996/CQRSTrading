@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CQRSTrading.Shared.Domain;
+using CQRSTrading.Shared.Domain.Exceptions;
 
 namespace CQRSTrading.Auctions.Domain.AuctionAggregate
 {

@@ -8,7 +8,7 @@ using Microsoft.Identity.Web;
 
 namespace CQRSTrading.WEB.Contexts.Auctions.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class AuctionsController : ControllerBase
@@ -29,7 +29,8 @@ namespace CQRSTrading.WEB.Contexts.Auctions.Controllers
 			var id = Guid.NewGuid();
 			command.Id = id;
 
-			command.UserId = Guid.Parse(User.GetObjectId() ?? throw new InvalidOperationException());
+			//command.UserId = Guid.Parse(User.GetObjectId() ?? throw new InvalidOperationException());
+			command.UserId = Guid.NewGuid();
 
 			await _mediator.Send(command);
 

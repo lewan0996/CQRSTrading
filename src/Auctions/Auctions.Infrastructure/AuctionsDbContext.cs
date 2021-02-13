@@ -1,6 +1,8 @@
 ﻿using CQRSTrading.Auctions.Domain.AuctionAggregate;
 using Microsoft.EntityFrameworkCore;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 namespace CQRSTrading.Auctions.Infrastructure
 {
 	public class AuctionsDbContext : DbContext
