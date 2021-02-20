@@ -13,9 +13,11 @@ namespace CQRSTrading.Shared.Infrastructure.AzureStorageQueue
 
 		public AzureStorageQueueEventBus(AzureStorageQueueConfiguration configuration)
 		{
+			var queueClientOptions = new QueueClientOptions { MessageEncoding = QueueMessageEncoding.Base64 };
+
 			_queueClient = configuration.DevMode
-				? new QueueClient("UseDevelopmentStorage=true", configuration.QueueName)
-				: new QueueClient(new Uri(configuration.Uri), new DefaultAzureCredential());
+				? new QueueClient("UseDevelopmentStorage=true", configuration.QueueName, queueClientOptions)
+				: new QueueClient(new Uri(configuration.Uri), new DefaultAzureCredential(), queueClientOptions);
 		}
 
 		public Task InitAsync() => _queueClient.CreateIfNotExistsAsync();
