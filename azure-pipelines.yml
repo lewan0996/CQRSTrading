@@ -1,9 +1,6 @@
 variables:
   buildConfiguration: Release
 
-trigger:
-- master
-
 stages:
 - stage: Build
   pool:
