@@ -2,7 +2,7 @@
 using CQRSTrading.Shared.Domain;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace CQRSTrading.Shared.Infrastructure
+namespace CQRSTrading.Shared.Infrastructure.EF
 {
 	public class EFTransactionAdapter : ITransaction
 	{

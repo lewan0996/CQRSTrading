@@ -1,4 +1,7 @@
 ﻿namespace CQRSTrading.Shared.ProjectionEvents.Abstractions
 {
-	public interface IProjectionEvent { }
+	public interface IProjectionEvent
+	{
+		string EventType { get; }
+	}
 }

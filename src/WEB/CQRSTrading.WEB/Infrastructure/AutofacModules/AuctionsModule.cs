@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using CQRSTrading.Auctions.Domain.AuctionAggregate;
 using CQRSTrading.Auctions.Infrastructure;
+using CQRSTrading.Auctions.Infrastructure.WriteModel;
 using CQRSTrading.Shared.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

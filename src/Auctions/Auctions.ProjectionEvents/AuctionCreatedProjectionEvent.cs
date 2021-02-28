@@ -6,6 +6,9 @@ namespace CQRSTrading.Auctions.ProjectionEvents
 {
 	public class AuctionCreatedProjectionEvent : IProjectionEvent
 	{
+		public const string EVENT_TYPE = "AuctionCreated";
+		public string EventType => EVENT_TYPE;
+		public Guid Id { get; }
 		public Guid UserId { get; }
 		public string Name { get; }
 		public string Description { get; }
@@ -15,6 +18,7 @@ namespace CQRSTrading.Auctions.ProjectionEvents
 
 		public AuctionCreatedProjectionEvent(Auction auction)
 		{
+			Id = auction.Id;
 			UserId = auction.UserId;
 			Name = auction.Name.Value;
 			Description = auction.Description.Value;

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using CQRSTrading.Auctions.Domain.AuctionAggregate;
 using CQRSTrading.Shared.Domain;
-using CQRSTrading.Shared.Infrastructure;
+using CQRSTrading.Shared.Infrastructure.EF;
 
-namespace CQRSTrading.Auctions.Infrastructure
+namespace CQRSTrading.Auctions.Infrastructure.WriteModel
 {
 	public class AuctionsWriteModelRepository : WriteModelRepository<Auction>
 	{

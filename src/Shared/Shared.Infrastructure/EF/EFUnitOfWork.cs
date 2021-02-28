@@ -6,7 +6,7 @@ using CQRSTrading.Shared.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace CQRSTrading.Shared.Infrastructure
+namespace CQRSTrading.Shared.Infrastructure.EF
 {
 	// ReSharper disable once InconsistentNaming
 	public class EFUnitOfWork : IUnitOfWork

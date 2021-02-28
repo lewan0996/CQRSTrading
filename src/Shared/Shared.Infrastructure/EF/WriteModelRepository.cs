@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CQRSTrading.Shared.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace CQRSTrading.Shared.Infrastructure
+namespace CQRSTrading.Shared.Infrastructure.EF
 {
 	public abstract class WriteModelRepository<TEntity> : IWriteModelRepository<TEntity> where TEntity : Entity, IAggregateRoot
 	{

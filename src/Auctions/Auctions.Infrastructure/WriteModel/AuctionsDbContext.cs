@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace CQRSTrading.Auctions.Infrastructure
+namespace CQRSTrading.Auctions.Infrastructure.WriteModel
 {
 	public class AuctionsDbContext : DbContext
 	{
