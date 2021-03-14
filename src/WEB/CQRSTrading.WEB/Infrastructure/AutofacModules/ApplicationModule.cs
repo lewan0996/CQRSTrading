@@ -1,9 +1,7 @@
 ﻿using System.Linq;
 using Autofac;
-using CQRSTrading.Auctions.Infrastructure;
 using CQRSTrading.Auctions.Infrastructure.WriteModel;
 using CQRSTrading.Shared.Domain;
-using CQRSTrading.Shared.Infrastructure;
 using CQRSTrading.Shared.Infrastructure.AzureStorageQueue;
 using CQRSTrading.Shared.Infrastructure.EF;
 using CQRSTrading.Shared.ProjectionEvents.Abstractions;

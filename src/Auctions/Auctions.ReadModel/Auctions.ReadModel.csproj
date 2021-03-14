@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.Application\Shared.Application\Shared.Application.csproj" />
+    <ProjectReference Include="..\..\Shared\Shared.ProjectionEvents.Abstractions\Shared.ProjectionEvents.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Shared\Shared.ReadModel\Shared.ReadModel.csproj" />
+    <ProjectReference Include="..\Auctions.Domain\Auctions.Domain.csproj" />
   </ItemGroup>
 
 </Project>

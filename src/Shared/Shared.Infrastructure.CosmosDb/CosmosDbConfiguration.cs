@@ -1,4 +1,6 @@
-﻿namespace CQRSTrading.Shared.Infrastructure.CosmosDb
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+namespace CQRSTrading.Shared.Infrastructure.CosmosDb
 {
 	public class CosmosDbConfiguration
 	{

@@ -1,5 +1,7 @@
 ﻿using System;
-using CQRSTrading.Shared.Application;
+using CQRSTrading.Shared.ReadModel;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace CQRSTrading.Auctions.ReadModel
 {

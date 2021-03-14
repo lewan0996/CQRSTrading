@@ -1,9 +1,6 @@
 using System.Threading.Tasks;
-using CQRSTrading.Shared.ProjectionEvents.Abstractions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace ReadModelMaterializer
 {
@@ -11,24 +8,27 @@ namespace ReadModelMaterializer
 	public class ReadModelMaterializerFunction
 	{
 		private readonly ReadModelMaterializeService _readModelMaterializeService;
+		private readonly ProjectionEventDeserializer _projectionEventDeserializer;
 
-		internal ReadModelMaterializerFunction(ReadModelMaterializeService readModelMaterializeService)
+		public ReadModelMaterializerFunction(ReadModelMaterializeService readModelMaterializeService,
+			ProjectionEventDeserializer projectionEventDeserializer)
 		{
 			_readModelMaterializeService = readModelMaterializeService;
+			_projectionEventDeserializer = projectionEventDeserializer;
 		}
 
 		[FunctionName("ReadModelMaterializerFunction")]
 		// ReSharper disable once UnusedMember.Global
-		public async Task<IActionResult> Run([QueueTrigger("projection-events", Connection = "StorageAccountConnectionString")]
+		public async Task Run([QueueTrigger("projection-events", Connection = "StorageAccountConnectionString")]
 			string message, ILogger log)
 		{
 			log.LogInformation($"C# Queue trigger function received: {message}");
 
-			var projectionEvent = JsonConvert.DeserializeObject<IProjectionEvent>(message);
+			var projectionEvent = _projectionEventDeserializer.Deserialize(message);
 
 			await _readModelMaterializeService.MaterializeAsync(projectionEvent);
 
-			return new OkObjectResult($"The projection event {message} has been materialized successfully");
+			log.LogInformation($"Projection event of type {projectionEvent.EventType} has been successfully materialized");
 		}
 	}
 }

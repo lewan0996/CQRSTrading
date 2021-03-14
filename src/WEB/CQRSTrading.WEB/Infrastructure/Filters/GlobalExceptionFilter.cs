@@ -28,13 +28,13 @@ namespace CQRSTrading.WEB.Infrastructure.Filters
 
 			switch (context.Exception)
 			{
-				case IDomainException:
+				case IDomainException _:
 					OnDomainException(context);
 					break;
-				case ValidationException:
+				case ValidationException _:
 					OnValidationException(context);
 					break;
-				case RecordNotFoundException:
+				case RecordNotFoundException _:
 					OnRecordNotFoundException(context);
 					break;
 				default:

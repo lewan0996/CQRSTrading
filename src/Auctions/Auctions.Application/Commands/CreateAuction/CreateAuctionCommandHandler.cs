@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using CQRSTrading.Auctions.Domain.AuctionAggregate;
-using CQRSTrading.Auctions.ProjectionEvents;
+using CQRSTrading.Auctions.ReadModel.ProjectionEvents;
 using CQRSTrading.Shared.Domain;
 using CQRSTrading.Shared.ProjectionEvents.Abstractions;
 using MediatR;

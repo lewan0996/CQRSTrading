@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CQRSTrading.Auctions.ProjectionEvents;
 using CQRSTrading.Auctions.ReadModel;
+using CQRSTrading.Auctions.ReadModel.ProjectionEvents;
 using CQRSTrading.Shared.ProjectionEvents.Abstractions;
 
 namespace ReadModelMaterializer
 {
-	internal class ReadModelMaterializeService
+	public class ReadModelMaterializeService
 	{
 		private readonly IAuctionsReadModelRepository _auctionsReadModelRepository;
 

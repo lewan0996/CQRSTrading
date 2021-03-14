@@ -4,7 +4,7 @@ using CQRSTrading.Auctions.ReadModel;
 using CQRSTrading.Shared.Infrastructure.CosmosDb;
 using Microsoft.Azure.Cosmos;
 
-namespace CQRSTrading.Auctions.Infrastructure.ReadModel
+namespace CQRSTrading.Auctions.Infrastructure.CosmosDb
 {
 	public class AuctionsCosmosDbReadModelRepository : IAuctionsReadModelRepository
 	{

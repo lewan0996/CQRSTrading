@@ -26,7 +26,7 @@ namespace CQRSTrading.Shared.Domain
 			}
 		}
 
-		public Guid Id { get; protected set; }
+		public Guid Id { get; }
 
 		private List<INotification> _domainEvents;
 		public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
