@@ -5,8 +5,8 @@ namespace CQRSTrading.Auctions.ReadModel
 {
 	public interface IAuctionsReadModelRepository
 	{
-		Task<Auction> Get(Guid id, string category);
-		Task<Auction> Get(Guid id, Guid userId);
+		Task<Auction> GetAsync(Guid id, string category);
+		Task<Auction> GetAsync(Guid id, Guid userId);
 		Task Insert(Auction auction);
 	}
 }

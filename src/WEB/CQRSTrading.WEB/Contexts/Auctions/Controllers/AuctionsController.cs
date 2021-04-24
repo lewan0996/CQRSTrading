@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CQRSTrading.Auctions.Application.Commands.CreateAuction;
+using CQRSTrading.Auctions.ReadModel;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,14 +15,21 @@ namespace CQRSTrading.WEB.Contexts.Auctions.Controllers
 	public class AuctionsController : ControllerBase
 	{
 		private readonly IMediator _mediator;
+		private readonly IAuctionsReadModelRepository _auctionsReadModelRepository;
 
-		public AuctionsController(IMediator mediator)
+		public AuctionsController(IMediator mediator, IAuctionsReadModelRepository auctionsReadModelRepository)
 		{
 			_mediator = mediator;
+			_auctionsReadModelRepository = auctionsReadModelRepository;
 		}
 
-		[HttpGet("{id:guid}")]
-		public async Task<IActionResult> Get(Guid id) => throw new NotImplementedException();
+		[HttpGet("{category}/{id:guid}")]
+		public async Task<IActionResult> GetByCategory(string category, Guid id)
+			=> Ok(await _auctionsReadModelRepository.GetAsync(id, category));
+
+		[HttpGet("{userId:guid}/{id:guid}")]
+		public async Task<IActionResult> GetByUser(Guid userId, Guid id)
+			=> Ok(await _auctionsReadModelRepository.GetAsync(id, userId));
 
 		[HttpPost]
 		public async Task<IActionResult> CreateAuction(CreateAuctionCommand command)
@@ -34,7 +42,7 @@ namespace CQRSTrading.WEB.Contexts.Auctions.Controllers
 
 			await _mediator.Send(command);
 
-			return AcceptedAtAction(nameof(Get), nameof(AuctionsController), new { id });
+			return AcceptedAtAction(nameof(GetByUser), nameof(AuctionsController), new { command.UserId, id });
 		}
 	}
 }

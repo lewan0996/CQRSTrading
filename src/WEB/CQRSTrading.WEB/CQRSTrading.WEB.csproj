@@ -44,6 +44,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Auctions\Auctions.Application\Auctions.Application.csproj" />
+		<ProjectReference Include="..\..\Auctions\Auctions.Infrastructure.CosmosDb\Auctions.Infrastructure.CosmosDb.csproj" />
 		<ProjectReference Include="..\..\Auctions\Auctions.Infrastructure\Auctions.Infrastructure.csproj" />
 		<ProjectReference Include="..\..\Shared\Shared.Infrastructure.CosmosDb\Shared.Infrastructure.CosmosDb.csproj" />
 	</ItemGroup>

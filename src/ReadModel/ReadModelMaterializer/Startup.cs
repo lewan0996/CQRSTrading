@@ -22,7 +22,7 @@ namespace ReadModelMaterializer
 
 					var auctionsCosmosDbReadModelRepository = new AuctionsCosmosDbReadModelRepository(cosmosDbAdapter);
 
-					auctionsCosmosDbReadModelRepository.Init()
+					auctionsCosmosDbReadModelRepository.InitAsync()
 						.Wait();
 
 					return auctionsCosmosDbReadModelRepository;

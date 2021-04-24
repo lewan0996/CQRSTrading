@@ -1,11 +1,13 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using CQRSTrading.Auctions.Domain.AuctionAggregate;
+using CQRSTrading.Auctions.Infrastructure.CosmosDb;
 using CQRSTrading.Auctions.Infrastructure.WriteModel;
+using CQRSTrading.Auctions.ReadModel;
 using CQRSTrading.Shared.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Auction = CQRSTrading.Auctions.Domain.AuctionAggregate.Auction;
 
 namespace CQRSTrading.WEB.Infrastructure.AutofacModules
 {
@@ -25,6 +27,11 @@ namespace CQRSTrading.WEB.Infrastructure.AutofacModules
 			builder.RegisterType<AuctionsWriteModelRepository>()
 				.As<IWriteModelRepository<Auction>>()
 				.InstancePerLifetimeScope();
+
+			builder.RegisterType<AuctionsCosmosDbReadModelRepository>()
+				.As<IAuctionsReadModelRepository>()
+				.SingleInstance()
+				.OnActivated(async h => await h.Instance.InitAsync());
 		}
 
 		private void AddDbContext(ContainerBuilder builder)

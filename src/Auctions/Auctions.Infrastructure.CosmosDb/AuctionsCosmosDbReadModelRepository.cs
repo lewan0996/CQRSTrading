@@ -20,7 +20,7 @@ namespace CQRSTrading.Auctions.Infrastructure.CosmosDb
 			_cosmosDbAdapter = cosmosDbAdapter;
 		}
 
-		public async Task Init()
+		public async Task InitAsync()
 		{
 			_userAuctionsContainer = await _cosmosDbAdapter.Database.CreateContainerIfNotExistsAsync(
 				USER_AUCTIONS_CONTAINER_NAME, "/userId");
@@ -31,7 +31,7 @@ namespace CQRSTrading.Auctions.Infrastructure.CosmosDb
 
 		public Task Insert(Auction item) => _userAuctionsContainer.CreateItemAsync(item); // zrób trigger, który to skopiuje do kontenera partycjonowanego po kategorii
 
-		public async Task<Auction> Get(Guid id, string category)
+		public async Task<Auction> GetAsync(Guid id, string category)
 		{
 			var response = await _categoryAuctionsContainer.ReadItemAsync<Auction>(
 				id.ToString(), new PartitionKey(category));
@@ -39,7 +39,7 @@ namespace CQRSTrading.Auctions.Infrastructure.CosmosDb
 			return response.Resource;
 		}
 
-		public async Task<Auction> Get(Guid id, Guid userId)
+		public async Task<Auction> GetAsync(Guid id, Guid userId)
 		{
 			var response = await _userAuctionsContainer.ReadItemAsync<Auction>(
 				id.ToString(), new PartitionKey(userId.ToString()));
